@@ -17,9 +17,11 @@ from snowflake.snowpark.functions import col
 st.write("debug")
 cnx = st.connection("snowflake")
 session = cnx.session()
-my_dataframe = session.table("smoothies.public.fruit_options").select(col('fruit_name'))
+my_dataframe = session.table("smoothies.public.fruit_options").select(col('fruit_name'),col("search_on"))
+
 # st.dataframe(data=my_dataframe, use_container_width=True)
-# pd_df = my_dataframe.to_pandas()
+pd_df = my_dataframe.to_pandas()
+
 
 ingredients_list = st.multiselect(
     "What are your favorite fruits",
@@ -37,8 +39,8 @@ if ingredients_list:
         
         ingredients_string += fruit + ' '
 
-        # search_on=pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
-        # st.write('The search value for ', fruit_chosen,' is ', search_on, '.')
+        search_on=pd_df.loc[pd_df['FRUIT_NAME'] == fruit_chosen, 'SEARCH_ON'].iloc[0]
+        st.write('The search value for ', fruit_chosen,' is ', search_on, '.')
         
         st.write(ingredients_string)
         fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit)
