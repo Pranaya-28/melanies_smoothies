@@ -32,8 +32,8 @@ ingredients_list = st.multiselect(
 
 ingredients_string  = ' '
 if ingredients_list:    
-    st.write("You selected:", ingredients_list)
-    st.text(ingredients_list)
+    # st.write("You selected:", ingredients_list)
+    # st.text(ingredients_list)
     for fruit in ingredients_list: 
         st.subheader(fruit + " Nutrition Information" )
         
