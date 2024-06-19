@@ -15,7 +15,7 @@ st.write(
 from snowflake.snowpark.functions import col
 cnx = st.connection("snowflake")
 session = cnx.session()
-my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
+my_dataframe = session.table("smoothies.public.fruit_options").select(col('search_on'))
 # st.dataframe(data=my_dataframe, use_container_width=True)
 
 ingredients_list = st.multiselect(
@@ -28,7 +28,7 @@ if ingredients_list:
     st.write("You selected:", ingredients_list)
     st.text(ingredients_list)
     for fruit in ingredients_list: 
-        st.subheader(fruit + "Nutrition Information" )
+        st.subheader(fruit + " Nutrition Information" )
         ingredients_string += fruit + ' '
         st.write(ingredients_string)
         fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit)
