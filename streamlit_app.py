@@ -24,7 +24,8 @@ my_dataframe = session.table("smoothies.public.fruit_options").select(col('fruit
 
 ingredients_list = st.multiselect(
     "What are your favorite fruits",
-    my_dataframe,
+    my_dataframe['fruit_name'] 
+    ,
     max_selections = 5
 )
 ingredients_string  = ' '
